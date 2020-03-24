@@ -64,10 +64,16 @@ program
   .command('list')
   .description('List All Templates')
   .action(() => {
-    console.log('Template List: ')
+    let templateList = []
     templates.forEach((template) => {
-      console.log(`${chalk.green(template.name)}: ${chalk.yellowBright(template.description)}`)
+      const listItem = {
+        templateName: template.name,
+        description: template.description
+      }
+      
+      templateList.push(listItem)
     })
+    console.table(templateList)
   })
 
 program.parse(process.argv)
