@@ -1,6 +1,6 @@
 {
   "name": "gentpl-cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Project To Generate Template On Your Own Way Like create-react-app | @vue/cli | @angular/cli",
   "author": "Jayson Wu <wulingjie991@outlook.com>",
   "main": "src/index.js",
@@ -33,13 +33,13 @@
     "package.json"
   ],
   "bugs": {
-    "url": "https://github.com/jayson991/gen-cli/issues"
+    "url": "https://github.com/jayson991/gentpl-cli/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jayson991/gen-cli.git"
+    "url": "git+https://github.com/jayson991/gentpl-cli.git"
   },
-  "homepage": "https://github.com/jayson991/gen-cli",
+  "homepage": "https://github.com/jayson991/gentpl-cli",
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.7",
@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "chalk": "^3.0.0",
+    "cli-table": "^0.3.1",
     "commander": "^5.0.0",
     "download-git-repo": "^3.0.2",
     "handlebars": "^4.7.3",

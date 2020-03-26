@@ -3,6 +3,7 @@
 const fs = require('fs')
 const ora = require('ora')
 const chalk = require('chalk')
+const Table = require('cli-table')
 const program = require('commander')
 const inquirer = require('inquirer')
 const handlebars = require('handlebars')
@@ -11,69 +12,102 @@ const download = require('download-git-repo')
 
 const templates = require('../config/templates.json')
 
-// -v || --version: check your package version
+const table = new Table({
+  chars: {
+    top: '═',
+    'top-mid': '╤',
+    'top-left': '╔',
+    'top-right': '╗',
+    bottom: '═',
+    'bottom-mid': '╧',
+    'bottom-left': '╚',
+    'bottom-right': '╝',
+    left: '║',
+    'left-mid': '╟',
+    mid: '─',
+    'mid-mid': '┼',
+    right: '║',
+    'right-mid': '╢',
+    middle: '│'
+  }
+})
+
 program.version('0.0.1')
 
 program
-  .command('init <template> <project>')
-  .description('Get Initial Template')
-  .action((templateName, projectName) => {
-    const spinner = ora('Template Downloading...')
-    spinner.start()
+  .command('new <app-name>')
+  .description('Create Project Through Exist Template')
+  .action((projectName) => {
+    let templateName = ''
 
-    const { downloadUrl } = templates.find((template) => templateName === template.name)
-    download(downloadUrl, projectName, { clone: true }, (err) => {
-      if (err) {
-        spinner.fail('Template Downloaded Failed')
-        console.log(logSymbols.error, chalk.red('Template Downloaded Failed:' + err))
-        return false
-      }
+    inquirer
+      .prompt([
+        {
+          type: 'rawlist',
+          name: 'name',
+          message: 'Choose A Template: ',
+          choices: [ 'react-template', 'react-typescript-template' ]
+        }
+      ])
+      .then((option) => {
+        templateName = option.name
 
-      spinner.succeed('Template Downloaded Success')
+        const spinner = ora('Template Downloads ...')
+        spinner.start()
 
-      // Change Your Package Info
-      inquirer
-        .prompt([
-          {
-            type: 'input',
-            name: 'name',
-            message: 'Project Name: '
-          },
-          {
-            type: 'input',
-            name: 'description',
-            message: 'Project Description: '
-          },
-          {
-            type: 'input',
-            name: 'author',
-            message: 'Project Author:'
+        const { downloadUrl } = templates.find((template) => templateName === template.name)
+        download(downloadUrl, projectName, { clone: true }, (err) => {
+          if (err) {
+            spinner.fail('Template Downloads Failed')
+            console.log(logSymbols.error, chalk.red('Template Downloaded Failed:' + err))
+            return false
           }
-        ])
-        .then((answers) => {
-          const packagePath = `${projectName}/package.json`
-          const packageContent = fs.readFileSync(packagePath, 'utf8')
-          const packageResult = handlebars.compile(packageContent)(answers)
-          fs.writeFileSync(packagePath, packageResult)
-          console.log(logSymbols.success, chalk.yellow('Get Initial Template Success'))
+
+          spinner.succeed('Template Downloads Success')
+
+          inquirer
+            .prompt([
+              {
+                type: 'input',
+                name: 'name',
+                message: 'Project Name:',
+                default: projectName
+              },
+              {
+                type: 'input',
+                name: 'description',
+                message: 'Project Description:'
+              },
+              {
+                type: 'input',
+                name: 'author',
+                message: 'Project Author:'
+              }
+            ])
+            .then((answers) => {
+              const packagePath = `${projectName}/package.json`
+              const packageContent = fs.readFileSync(packagePath, 'utf8')
+              const packageResult = handlebars.compile(packageContent)(answers)
+              fs.writeFileSync(packagePath, packageResult)
+              console.log(logSymbols.success, chalk.yellow('Get Initial Template Success'))
+            })
         })
-    })
+      })
   })
 
 program
   .command('list')
   .description('List All Templates')
   .action(() => {
-    let templateList = []
-    templates.forEach((template) => {
-      const listItem = {
-        templateName: template.name,
-        description: template.description
-      }
-      
-      templateList.push(listItem)
+    table.push([ 'templateIndex', 'templateName', 'description' ])
+    templates.forEach((template, index) => {
+      const listItem = [ index + 1, template.name, template.description ]
+
+      table.push(listItem)
     })
-    console.table(templateList)
+
+    console.log(table.toString())
+    process.exit(0)
   })
 
 program.parse(process.argv)
