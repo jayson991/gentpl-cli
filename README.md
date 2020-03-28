@@ -13,12 +13,14 @@ $ npm i -g gentpl-cli
 ```bash
 # look for help
 $ gentpl -h
+$ gentpl --help
 
 # check gentpl-cli version
-$ gentpl -v
+$ gentpl -V
+$ gentpl --version
 
 # init your own project
-$ gentpl new <app-name>
+$ gentpl init
 
 # list all templates
 $ gentpl list

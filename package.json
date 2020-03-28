@@ -1,11 +1,10 @@
 {
   "name": "gentpl-cli",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A Project To Generate Template On Your Own Way Like create-react-app | @vue/cli | @angular/cli",
   "author": "Jayson Wu <wulingjie991@outlook.com>",
   "main": "src/index.js",
   "scripts": {
-    "gentpl": "node src/index.js",
     "lint": "eslint src --ext .js",
     "prettier": "prettier --write src/**/*.js"
   },
@@ -14,13 +13,10 @@
     "gentpl": "src/index.js"
   },
   "keywords": [
-    "jest",
     "node",
     "babel",
-    "react",
     "eslint",
     "gentpl",
-    "webpack",
     "prettier",
     "template",
     "front-end",
@@ -48,7 +44,7 @@
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
-    "prettier": "^2.0.1"
+    "prettier": "^2.0.2"
   },
   "dependencies": {
     "chalk": "^3.0.0",
@@ -56,8 +52,6 @@
     "commander": "^5.0.0",
     "download-git-repo": "^3.0.2",
     "handlebars": "^4.7.3",
-    "inquirer": "^7.1.0",
-    "log-symbols": "^3.0.0",
-    "ora": "^4.0.3"
+    "inquirer": "^7.1.0"
   }
 }
