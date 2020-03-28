@@ -16,8 +16,11 @@ $ gentpl -h
 $ gentpl --help
 
 # check gentpl-cli version
-$ gentpl -V
+$ gentpl -v
 $ gentpl --version
+
+# check gentpl-cli info
+$ gentpl info
 
 # init your own project
 $ gentpl init

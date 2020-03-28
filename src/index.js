@@ -2,13 +2,12 @@
 
 const fs = require('fs')
 const chalk = require('chalk')
+const CFonts = require('cfonts')
 const Table = require('cli-table')
 const program = require('commander')
 const inquirer = require('inquirer')
 const handlebars = require('handlebars')
 const download = require('download-git-repo')
-
-const templates = require('../config/templates.json')
 
 const table = new Table({
   chars: {
@@ -30,11 +29,27 @@ const table = new Table({
   }
 })
 
-const progressBar = '=='
-const progressArrow = '>>'
-const progressContent = []
+program.version('0.0.5', '-v, --version', 'Output The Current Version')
 
-program.version('0.0.4')
+program
+  .command('info')
+  .description('Output Project Information')
+  .action(() => {
+    CFonts.say('GENTPL-CLI', {
+      font: 'shade',
+      align: 'center',
+      colors: [ '#f80', '#840' ]
+    })
+
+    const packageInfo = require('../package.json')
+    
+    console.log('Verison:', chalk.cyanBright(packageInfo.version))
+    console.log('Description:', chalk.cyanBright('The Project Can Provide All Kinds Of Front-end Templates For You, Just Have A Nice Try!'))
+
+    process.exit(0)
+  })
+
+const templates = require('../config/templates.json')
 
 program
   .command('list')
@@ -53,9 +68,9 @@ program
 
 program
   .command('init')
-  .description('Create Project Through Exist Template')
+  .description('Initialize Project Through Template')
   .action(() => {
-    let projectName = 'your-project'
+    let projectName = 'original-project'
     let templateName = ''
     let templateNames = []
 
@@ -89,19 +104,22 @@ program
         }
       ])
       .then((answers) => {
+        const progressBar = '=='
+        const progressArrow = '>>'
+        const progressContent = []
         templateName = answers.template
 
         const timer = setInterval(() => {
           console.log(chalk.cyanBright([ '[', ...progressContent, progressArrow, ']' ].join('')))
           progressContent.push(progressBar)
-        }, 1000)
+        }, 500)
 
         const { downloadUrl } = templates.find((template) => templateName === template.name)
         download(downloadUrl, projectName, { clone: true }, (err) => {
           clearInterval(timer)
 
           if (err) {
-            console.log(chalk.red('Template Downloaded Failed'))
+            console.log(chalk.red('Template Downloading Failed'))
             process.exit(0)
           }
 
@@ -109,11 +127,11 @@ program
           const packageContent = fs.readFileSync(packagePath, 'utf8')
           const packageResult = handlebars.compile(packageContent)(answers)
           fs.writeFileSync(packagePath, packageResult)
-          console.log(chalk.blueBright('Get Initial Template Success'))
+          console.log(chalk.blueBright('Initialize Your Project Successfully'))
         })
       })
       .catch((err) => {
-        console.log(chalk.red('Create New Project Failed: ' + err))
+        console.log(chalk.red('Initialize Your Project Failed: ' + err))
         process.exit(0)
       })
   })
