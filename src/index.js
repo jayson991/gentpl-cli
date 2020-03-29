@@ -6,7 +6,6 @@ const CFonts = require('cfonts')
 const Table = require('cli-table')
 const program = require('commander')
 const inquirer = require('inquirer')
-const handlebars = require('handlebars')
 const download = require('download-git-repo')
 
 const table = new Table({
@@ -42,9 +41,14 @@ program
     })
 
     const packageInfo = require('../package.json')
-    
+
     console.log('Verison:', chalk.cyanBright(packageInfo.version))
-    console.log('Description:', chalk.cyanBright('The Project Can Provide All Kinds Of Front-end Templates For You, Just Have A Nice Try!'))
+    console.log(
+      'Description:',
+      chalk.cyanBright(
+        'The Project Can Provide All Kinds Of Front-end Templates For You, Just Have A Nice Try!'
+      )
+    )
 
     process.exit(0)
   })
@@ -95,12 +99,14 @@ program
         {
           type: 'input',
           name: 'description',
-          message: 'Project Description: '
+          message: 'Project Description: ',
+          default: 'A Template Project'
         },
         {
           type: 'input',
           name: 'author',
-          message: 'Project Author: '
+          message: 'Project Author: ',
+          default: 'Jayson Wu <wulingjie991@outlook.com>'
         }
       ])
       .then((answers) => {
@@ -108,6 +114,7 @@ program
         const progressArrow = '>>'
         const progressContent = []
         templateName = answers.template
+        delete answers.template
 
         const timer = setInterval(() => {
           console.log(chalk.cyanBright([ '[', ...progressContent, progressArrow, ']' ].join('')))
@@ -125,9 +132,19 @@ program
 
           const packagePath = `${projectName}/package.json`
           const packageContent = fs.readFileSync(packagePath, 'utf8')
-          const packageResult = handlebars.compile(packageContent)(answers)
-          fs.writeFileSync(packagePath, packageResult)
-          console.log(chalk.blueBright('Initialize Your Project Successfully'))
+          fs.writeFileSync(
+            packagePath,
+            JSON.stringify({ ...JSON.parse(packageContent), ...answers }, null, 4),
+            (err) => {
+              if (err) {
+                console.log(chalk.red('Rewrite Package.json Failed'))
+                process.exit(0)
+              }
+
+              console.log(chalk.cyanBright('Rewrite Package.json Successfully'))
+            }
+          )
+          console.log(chalk.cyanBright('Initialize Your Project Successfully'))
         })
       })
       .catch((err) => {
