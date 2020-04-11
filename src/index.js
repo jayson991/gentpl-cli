@@ -3,38 +3,17 @@
 const fs = require('fs');
 const chalk = require('chalk');
 const CFonts = require('cfonts');
-const Table = require('cli-table');
 const program = require('commander');
 const inquirer = require('inquirer');
 const download = require('download-git-repo');
 
-const table = new Table({
-  chars: {
-    top: '═',
-    'top-mid': '╤',
-    'top-left': '╔',
-    'top-right': '╗',
-    bottom: '═',
-    'bottom-mid': '╧',
-    'bottom-left': '╚',
-    'bottom-right': '╝',
-    left: '║',
-    'left-mid': '╟',
-    mid: '─',
-    'mid-mid': '┼',
-    right: '║',
-    'right-mid': '╢',
-    middle: '│'
-  }
-});
 const packageInfo = require('../package.json');
 program.version(packageInfo.version, '-v, --version', 'Output The Current Version');
 program
   .command('info')
   .description('Output Project Information')
   .action(() => {
-    CFonts.say('GENTPL-CLI', {font: 'shade', align: 'center', colors: ['#f80', '#840']});
-    const packageInfo = require('../package.json');
+    CFonts.say('GENTPL-CLI', { font: 'shade', align: 'left', colors: ['#f80', '#840'] });
     console.log('Verison:', chalk.cyanBright(packageInfo.version));
     console.log(
       'Description:',
@@ -49,12 +28,15 @@ program
   .command('list')
   .description('List All Templates')
   .action(() => {
-    table.push(['templateIndex', 'templateName', 'description']);
-    templates.forEach((template, index) => {
-      const listItem = [index + 1, template.name, template.description];
-      table.push(listItem);
+    let allTemplates = [];
+    templates.forEach((template) => {
+      let templateItem = {
+        templateName: template.name,
+        description: template.description
+      };
+      allTemplates.push(templateItem);
     });
-    console.log(table.toString());
+    console.table(allTemplates);
     process.exit(0);
   });
 program
@@ -64,15 +46,15 @@ program
     let templatePlatforms = ['GitHub'];
     inquirer
       .prompt([
-        {type: 'input', name: 'name', message: 'Template Name: '},
-        {type: 'input', name: 'author', message: 'Template Author: '},
+        { type: 'input', name: 'name', message: 'Template Name: ' },
+        { type: 'input', name: 'author', message: 'Template Author: ' },
         {
           type: 'input',
           name: 'description',
           message: 'Description: ',
           default: 'A Template Project'
         },
-        {type: 'list', name: 'platform', message: 'Template From: ', choices: templatePlatforms}
+        { type: 'list', name: 'platform', message: 'Template From: ', choices: templatePlatforms }
       ])
       .then((answers) => {
         if (!answers.name.trim() || !answers.author.trim()) {
@@ -111,8 +93,8 @@ program
     });
     inquirer
       .prompt([
-        {type: 'input', name: 'name', message: 'Project Name: ', default: projectName},
-        {type: 'list', name: 'template', message: 'Project Template: ', choices: templateNames},
+        { type: 'input', name: 'name', message: 'Project Name: ', default: projectName },
+        { type: 'list', name: 'template', message: 'Project Template: ', choices: templateNames },
         {
           type: 'input',
           name: 'description',
@@ -144,8 +126,8 @@ program
           process.stdout.write(chalk.greenBright(progress));
           if (contentLength >= terminalWidth) clearInterval(timer);
         };
-        const {downloadUrl} = templates.find((template) => templateName === template.name);
-        download(downloadUrl, projectName, {clone: true}, (err) => {
+        const { downloadUrl } = templates.find((template) => templateName === template.name);
+        download(downloadUrl, projectName, { clone: true }, (err) => {
           clearInterval(timer);
           if (err) {
             console.log(chalk.red('Template Downloading Failed: ', err));
@@ -155,7 +137,7 @@ program
           const packageContent = fs.readFileSync(packagePath, 'utf8');
           fs.writeFileSync(
             packagePath,
-            JSON.stringify({...JSON.parse(packageContent), ...answers}, null, 4),
+            JSON.stringify({ ...JSON.parse(packageContent), ...answers }, null, 4),
             (err) => {
               if (err) {
                 console.log(chalk.red('Rewrite Package.json Failed: ', err));

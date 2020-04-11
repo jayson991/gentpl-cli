@@ -22,6 +22,9 @@ $ gentpl --version
 # check gentpl-cli info
 $ gentpl info
 
+# add your own template just for you
+$ gentpl add
+
 # init your own project
 $ gentpl init
 
