@@ -1,6 +1,6 @@
 {
   "name": "gentpl-cli",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "A Project To Generate Template On Your Own Way Like create-react-app | @vue/cli | @angular/cli",
   "author": "Jayson Wu <wulingjie991@outlook.com>",
   "main": "src/index.js",
@@ -37,20 +37,19 @@
   },
   "homepage": "https://github.com/jayson991/gentpl-cli",
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.7",
-    "@babel/preset-env": "^7.9.5",
+    "@babel/cli": "^7.10.3",
+    "@babel/core": "^7.10.3",
+    "@babel/preset-env": "^7.10.3",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-prettier": "^3.1.2",
-    "prettier": "^2.0.4"
+    "eslint": "^7.3.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.0.5"
   },
   "dependencies": {
-    "cfonts": "^2.8.1",
-    "chalk": "^3.0.0",
-    "commander": "^5.0.0",
+    "cfonts": "^2.8.5",
+    "commander": "^5.1.0",
     "download-git-repo": "^3.0.2",
-    "inquirer": "^7.1.0"
+    "inquirer": "^7.2.0"
   }
 }

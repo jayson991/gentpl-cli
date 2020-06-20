@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
-const chalk = require('chalk');
 const CFonts = require('cfonts');
 const program = require('commander');
 const inquirer = require('inquirer');
@@ -14,12 +13,10 @@ program
   .description('Output Project Information')
   .action(() => {
     CFonts.say('GENTPL-CLI', { font: 'shade', align: 'left', colors: ['#f80', '#840'] });
-    console.log('Verison:', chalk.cyanBright(packageInfo.version));
+    console.log('Verison:', packageInfo.version);
     console.log(
       'Description:',
-      chalk.cyanBright(
-        'The Project Can Provide All Kinds Of Front-end Templates For You, Just Have A Nice Try!'
-      )
+      'The Project Can Provide All Kinds Of Front-end Templates For You, Just Have A Nice Try!'
     );
     process.exit(0);
   });
@@ -58,7 +55,7 @@ program
       ])
       .then((answers) => {
         if (!answers.name.trim() || !answers.author.trim()) {
-          console.log(chalk.red('Add Local Template To CLI Failed: '));
+          console.log('Add Local Template To CLI Failed: ');
           process.exit(0);
         }
         const template = {
@@ -73,11 +70,11 @@ program
             console.log('Add Local Template To CLI Failed: ', err);
             process.exit(0);
           }
-          console.log(chalk.cyanBright('Add Local Template To CLI Successful'));
+          console.log('Add Local Template To CLI Successful');
         });
       })
       .catch((err) => {
-        console.log(chalk.red('Add Local Template To CLI Failed: ', err));
+        console.log('Add Local Template To CLI Failed: ', err);
         process.exit(0);
       });
   });
@@ -115,44 +112,36 @@ program
         templateName = answers.template;
         delete answers.template;
         const timer = setInterval(() => {
-          printProgress(['[', ...progressContent, progressArrow, ']'].join(''));
+          console.log(['[', ...progressContent, progressArrow, ']'].join(''));
           progressContent.push(progressBar);
         }, 500);
-        const printProgress = (progress) => {
-          const terminalWidth = process.stdout.columns - 10;
-          const contentLength = progress.contentLength;
-          process.stdout.clearLine();
-          process.stdout.cursorTo(0);
-          process.stdout.write(chalk.greenBright(progress));
-          if (contentLength >= terminalWidth) clearInterval(timer);
-        };
         const { downloadUrl } = templates.find((template) => templateName === template.name);
-        download(downloadUrl, projectName, { clone: true }, (err) => {
+        download(downloadUrl, answers.name || projectName, { clone: true }, (err) => {
           clearInterval(timer);
           if (err) {
-            console.log(chalk.red('Template Downloading Failed: ', err));
+            console.log('Template Downloading Failed: ', err);
             process.exit(0);
           }
-          const packagePath = `${projectName}/package.json`;
+          const packagePath = `${answers.name || projectName}/package.json`;
           const packageContent = fs.readFileSync(packagePath, 'utf8');
           fs.writeFileSync(
             packagePath,
             JSON.stringify({ ...JSON.parse(packageContent), ...answers }, null, 4),
             (err) => {
               if (err) {
-                console.log(chalk.red('Rewrite Package.json Failed: ', err));
+                console.log('Rewrite Package.json Failed: ', err);
                 process.exit(0);
               }
               console.log('');
-              console.log(chalk.cyanBright('Rewrite Package.json Successful'));
+              console.log('Rewrite Package.json Successful');
             }
           );
           console.log('');
-          console.log(chalk.cyanBright('Initialize Your Project Successful'));
+          console.log('Initialize Your Project Successful');
         });
       })
       .catch((err) => {
-        console.log(chalk.red('Initialize Your Project Failed: ', err));
+        console.log('Initialize Your Project Failed: ', err);
         process.exit(0);
       });
   });
