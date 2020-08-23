@@ -34,6 +34,7 @@ $ gentpl list
 
 ## All Templates
 
-_react-template_
-
-> It Contains Jest | Babel | Eslint | Prettier | Webpack | Node-sass For You, You Won't Be Worry About Environment Of Your New Project.
+|       Template Name       | Main Language |
+| :-----------------------: | :-----------: |
+|      react-template       |  Javascript   |
+| react-typescript-template |  Typescript   |

@@ -1,8 +1,14 @@
 [
     {
         "name": "react-template",
-        "description": "It Contains Jest | Babel | Eslint | Prettier | Webpack | Node-sass For You To Generate Your Own Project.",
+        "description": "A React Template Project",
         "url": "https://github.com/jayson991/react-template",
         "downloadUrl": "https://github.com:jayson991/react-template#master"
+    },
+    {
+        "name": "react-typescript-template",
+        "description": "A React Typescript Template Project",
+        "url": "https://github.com/jayson991/react-typescript-template",
+        "downloadUrl": "https://github.com:jayson991/react-typescript-template#master"
     }
 ]
