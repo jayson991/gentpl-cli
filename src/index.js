@@ -132,12 +132,10 @@ program
                 console.log('Rewrite Package.json Failed: ', err);
                 process.exit(0);
               }
-              console.log('');
-              console.log('Rewrite Package.json Successful');
+              console.log('\n', 'Rewrite Package.json Successful');
             }
           );
-          console.log('');
-          console.log('Initialize Your Project Successful');
+          console.log('\n', 'Initialize Your Project Successful');
         });
       })
       .catch((err) => {
