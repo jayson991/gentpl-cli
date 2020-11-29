@@ -41,17 +41,19 @@ program
   .description('Add Local Template To CLI')
   .action(() => {
     let templatePlatforms = ['GitHub'];
+    let branchNames = ['main', 'master'];
     inquirer
       .prompt([
         { type: 'input', name: 'name', message: 'Template Name: ' },
-        { type: 'input', name: 'author', message: 'Template Author: ' },
+        { type: 'input', name: 'author', message: 'GitHub UserName: ', default: 'jayson991' },
         {
           type: 'input',
           name: 'description',
           message: 'Description: ',
           default: 'A Template Project'
         },
-        { type: 'list', name: 'platform', message: 'Template From: ', choices: templatePlatforms }
+        { type: 'list', name: 'platform', message: 'Template From: ', choices: templatePlatforms },
+        { type: 'list', name: 'branch', message: 'From Branch: ', choices: branchNames }
       ])
       .then((answers) => {
         if (!answers.name.trim() || !answers.author.trim()) {
@@ -62,7 +64,7 @@ program
           name: answers.name,
           description: answers.description,
           url: `https://github.com/${answers.author}/${answers.name}`,
-          downloadUrl: `https://github.com:${answers.author}/${answers.name}#master`
+          downloadUrl: `https://github.com:${answers.author}/${answers.name}#${answers.branch}`
         };
         templates.push(template);
         fs.writeFile('config/templates.json', JSON.stringify(templates, null, 4), (err) => {

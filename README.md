@@ -34,7 +34,9 @@ $ gentpl list
 
 ## All Templates
 
-|       Template Name       | Main Language |
-| :-----------------------: | :-----------: |
-|      react-template       |  Javascript   |
-| react-typescript-template |  Typescript   |
+|       Template Name       | Main Language (Framework) |
+| :-----------------------: | :-----------------------: |
+|      react-template       |        Javascript         |
+| react-typescript-template |        Typescript         |
+|       vue2-template       |       Vue(Webpack)        |
+|    wechat-app-template    |       Wechat Applet       |
