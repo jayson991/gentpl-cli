@@ -1,0 +1,32 @@
+[
+  {
+      "name": "react-template",
+      "description": "A React Template Project",
+      "url": "https://github.com/jayson991/react-template",
+      "downloadUrl": "https://github.com:jayson991/react-template#master"
+  },
+  {
+      "name": "react-typescript-template",
+      "description": "A React Typescript Template Project",
+      "url": "https://github.com/jayson991/react-typescript-template",
+      "downloadUrl": "https://github.com:jayson991/react-typescript-template#master"
+  },
+  {
+      "name": "vue2-template",
+      "description": "A Vue 2.x Template Project Using Webpack",
+      "url": "https://github.com/jayson991/vue2-template",
+      "downloadUrl": "https://github.com:jayson991/vue2-template#main"
+  },
+  {
+      "name": "wechat-app-template",
+      "description": "A Wechat App Template Built By Gulp",
+      "url": "https://github.com/jayson991/wechat-app-template",
+      "downloadUrl": "https://github.com:jayson991/wechat-app-template#main"
+  },
+  {
+      "name": "vue2-library-template",
+      "description": "A Vue 2.x Library Template",
+      "url": "https://github.com/jayson991/vue2-library-template",
+      "downloadUrl": "https://github.com:jayson991/vue2-library-template#main"
+  }
+]

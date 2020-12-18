@@ -1,6 +1,6 @@
 {
   "name": "gentpl-cli",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A Project To Generate Template On Your Own Way Like create-react-app | @vue/cli | @angular/cli",
   "author": "Jayson Wu <wulingjie991@outlook.com>",
   "main": "lib/index.js",
@@ -15,6 +15,7 @@
     "gentpl": "lib/index.js"
   },
   "keywords": [
+    "gulp",
     "node",
     "babel",
     "eslint",
@@ -26,7 +27,6 @@
   ],
   "files": [
     "lib",
-    "config",
     "README.md",
     "package.json"
   ],
@@ -47,6 +47,7 @@
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-prettier": "^3.3.0",
     "gulp": "^4.0.2",
+    "gulp-jsonminify": "^1.1.0",
     "gulp-terser": "^2.0.0",
     "prettier": "^2.2.1"
   },

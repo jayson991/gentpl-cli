@@ -20,7 +20,7 @@ program
     )
     process.exit(0)
   })
-const templates = require('../config/templates.json')
+const templates = require('./templates.json')
 program
   .command('list')
   .description('List All Templates')
@@ -67,7 +67,7 @@ program
           downloadUrl: `https://github.com:${answers.author}/${answers.name}#${answers.branch}`
         }
         templates.push(template)
-        fs.writeFile('config/templates.json', JSON.stringify(templates, null, 4), (err) => {
+        fs.writeFile('templates.json', JSON.stringify(templates, null, 4), (err) => {
           if (err) {
             console.log('Add Local Template To CLI Failed: ', err)
             process.exit(0)
