@@ -67,7 +67,7 @@ program
           downloadUrl: `https://github.com:${answers.author}/${answers.name}#${answers.branch}`
         }
         templates.push(template)
-        fs.writeFile('templates.json', JSON.stringify(templates, null, 4), (err) => {
+        fs.writeFile('templates.json', JSON.stringify(templates, null, 2), (err) => {
           if (err) {
             console.log('Add Local Template To CLI Failed: ', err)
             process.exit(0)
