@@ -1,9 +1,9 @@
 {
   "name": "gentpl-cli",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A Project To Generate Template On Your Own Way Like create-react-app | @vue/cli | @angular/cli",
   "author": "Jayson Wu <wulingjie991@outlook.com>",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "license": "ISC",
   "scripts": {
     "build": "gulp",
@@ -12,7 +12,7 @@
     "prettier": "prettier --write src/**/*.js"
   },
   "bin": {
-    "gentpl": "src/index.js"
+    "gentpl": "lib/index.js"
   },
   "keywords": [
     "node",
@@ -25,7 +25,7 @@
     "gentpl-cli"
   ],
   "files": [
-    "src",
+    "lib",
     "config",
     "README.md",
     "package.json"

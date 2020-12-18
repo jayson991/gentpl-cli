@@ -22,5 +22,11 @@
         "description": "A Wechat App Template Built By Gulp",
         "url": "https://github.com/jayson991/wechat-app-template",
         "downloadUrl": "https://github.com:jayson991/wechat-app-template#main"
+    },
+    {
+        "name": "vue2-library-template",
+        "description": "A Vue 2.x Library Template",
+        "url": "https://github.com/jayson991/vue2-library-template",
+        "downloadUrl": "https://github.com:jayson991/vue2-library-template#main"
     }
 ]
