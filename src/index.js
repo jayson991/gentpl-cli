@@ -128,7 +128,7 @@ program
           const packageContent = fs.readFileSync(packagePath, 'utf8')
           fs.writeFileSync(
             packagePath,
-            JSON.stringify({ ...JSON.parse(packageContent), ...answers }, null, 4),
+            JSON.stringify({ ...JSON.parse(packageContent), ...answers }, null, 2),
             (err) => {
               if (err) {
                 console.log('Rewrite Package.json Failed: ', err)
