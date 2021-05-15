@@ -1,4 +1,5 @@
 const fs = require('fs')
+const ora = require('ora')
 const CFonts = require('cfonts')
 const program = require('commander')
 const inquirer = require('inquirer')
@@ -111,26 +112,27 @@ program
         },
       ])
       .then((answers: { name: string; template?: string; description: string; author: string }) => {
-        const progressBar = '=='
-        const progressArrow = '>>'
-        const progressContent: string[] = []
         const templateName: string | undefined = answers.template
         delete answers.template
-        const timer = setInterval(() => {
-          console.log(['[', ...progressContent, progressArrow, ']'].join(''))
-          progressContent.push(progressBar)
-        }, 500)
+
+        console.log('\n')
+        const spinner = ora('Template Downloading').start()
+
         const { downloadUrl } =
           templates.find(
             (template: { name: string; description: string; url: string; downloadUrl: string }) =>
               templateName === template.name,
           ) || {}
         download(downloadUrl, answers.name || projectName, { clone: true }, (err: Error) => {
-          clearInterval(timer)
           if (err) {
-            console.log('Template Downloading Failed: ', err)
+            spinner.fail('Template Downloading Failed')
+            spinner.clear()
             process.exit(0)
           }
+
+          spinner.succeed('Template Downloading Successful')
+          spinner.clear()
+
           const packagePath = `${answers.name || projectName}/package.json`
           const packageContent = fs.readFileSync(packagePath, 'utf8')
           fs.writeFileSync(
