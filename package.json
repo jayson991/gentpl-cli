@@ -1,21 +1,20 @@
 {
   "name": "gentpl-cli",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "A Project To Generate Template On Your Own Way Like create-react-app | @vue/cli | @angular/cli",
-  "author": "Jayson Wu <wulingjie991@outlook.com>",
+  "author": "Jayson Wu <jaysonwu991@outlook.com>",
   "main": "lib/index.js",
   "license": "ISC",
   "scripts": {
-    "build": "gulp",
-    "lint": "eslint src --ext .js",
-    "lint:fix": "eslint src --ext .js --fix",
-    "prettier": "prettier --write src/**/*.js"
+    "build": "rollup -c && gulp",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "format": "prettier --write --parser=typescript src/**/*.ts"
   },
   "bin": {
     "gentpl": "lib/index.js"
   },
   "keywords": [
-    "gulp",
     "node",
     "babel",
     "eslint",
@@ -39,21 +38,27 @@
   },
   "homepage": "https://github.com/jayson991/gentpl-cli",
   "devDependencies": {
-    "@babel/core": "^7.12.13",
-    "@babel/preset-env": "^7.12.13",
-    "babel-eslint": "^10.1.0",
+    "@babel/core": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-typescript": "^8.2.1",
+    "@types/node": "^15.3.0",
+    "@typescript-eslint/eslint-plugin": "^4.23.0",
+    "@typescript-eslint/parser": "^4.23.0",
     "del": "^6.0.0",
-    "eslint": "^7.19.0",
+    "eslint": "^7.26.0",
     "eslint-config-prettier": "^7.2.0",
-    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-prettier": "^3.4.0",
     "gulp": "^4.0.2",
     "gulp-jsonminify": "^1.1.0",
-    "gulp-terser": "^2.0.1",
-    "prettier": "^2.2.1"
+    "prettier": "^2.3.0",
+    "rollup": "^2.47.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "typescript": "^4.2.4"
   },
   "dependencies": {
-    "cfonts": "^2.9.1",
-    "commander": "^7.0.0",
+    "cfonts": "^2.9.2",
+    "commander": "^7.2.0",
     "download-git-repo": "^3.0.2",
     "inquirer": "^7.3.3"
   }

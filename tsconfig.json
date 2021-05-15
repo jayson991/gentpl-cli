@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES6",
+    "outDir": "./lib",
+    "module": "ESNext",
+    "declaration": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "lib": ["DOM", "ES2015"],
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "./src/"
+  ]
+}

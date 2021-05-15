@@ -1,7 +1,7 @@
 module.exports = {
   presets: {
     targets: {
-      node: 'current'
-    }
-  }
+      node: 'current',
+    },
+  },
 }
