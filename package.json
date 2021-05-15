@@ -1,6 +1,6 @@
 {
   "name": "gentpl-cli",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A Project To Generate Template On Your Own Way Like create-react-app | @vue/cli | @angular/cli",
   "author": "Jayson Wu <jaysonwu991@outlook.com>",
   "main": "lib/index.js",

@@ -115,7 +115,7 @@ program
         const templateName: string | undefined = answers.template
         delete answers.template
 
-        console.log('\n')
+        console.log('')
         const spinner = ora('Template Downloading').start()
 
         const { downloadUrl } =
